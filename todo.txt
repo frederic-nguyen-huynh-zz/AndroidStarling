@@ -8,4 +8,7 @@ This repository will focus research over starling possibility. Using some basic 
 - reference all the difference between web application, and mobile AIR application
 
 
-
+Problems / Issues
+- AIR SDK and runtime for linux has been stop on version 2.6 by Adobe. No other compiled binaries are available.
+Mainly, that means we can not build apk / api file on a linux workstation for the moment. By the way, we can develop, and test build with an swf file. We should still use a Microsoft Windows or MacOs environnement to build the apk / ipa files.
+Ok, that's weird...
