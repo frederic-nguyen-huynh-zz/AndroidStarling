@@ -14,6 +14,7 @@ package {
 			_starlingInstance = new Starling(AndroidMainClass, stage);
 			_starlingInstance.showStats = true;
 			_starlingInstance.start();
+
 		}
 
 		private var _starlingInstance : Starling;

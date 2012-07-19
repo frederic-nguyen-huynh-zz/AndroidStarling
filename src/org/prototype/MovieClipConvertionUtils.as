@@ -7,6 +7,7 @@
  */
 package org.prototype {
 	import flash.display.MovieClip;
+	import flash.utils.getTimer;
 
 	public class MovieClipConvertionUtils {
 
@@ -21,6 +22,7 @@ package org.prototype {
 		 * @see IAnimationBound
 		 */
 		public static function getMaxSize (animation : MovieClip) : IAnimationBound {
+			var startTime : Number = getTimer();
 			var animationLength : int = animation.totalFrames;
 
 			var maxWidth : int, maxHeight : int, xDelta : int, yDelta : int;
@@ -32,6 +34,8 @@ package org.prototype {
 				yDelta = Math.min (yDelta, animation.y);
 			}
 
+			var duration : Number = getTimer() - startTime;
+			trace("MovieClipConvertionUtils::getMaxSize() duration : " + (duration) + "ms");
 			return new AnimationBoundImpl (
 					maxWidth
 					, maxHeight
