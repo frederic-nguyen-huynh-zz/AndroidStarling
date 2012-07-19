@@ -1,0 +1,11 @@
+Starling usability check.
+
+To enable mobile device targeting, we'll try different ways (Unity 3D, pure Actionscript, stage3D wih Starling)
+
+This repository will focus research over starling possibility. Using some basic assets, this prototype will focus on: 
+- benchmark the 3D display api on an Android device (lack of iOs device) 
+- use the screen touch controls, for click and drag'n drop operation
+- reference all the difference between web application, and mobile AIR application
+
+
+
