@@ -12,3 +12,5 @@ Problems / Issues
 - AIR SDK and runtime for linux has been stop on version 2.6 by Adobe. No other compiled binaries are available.
 Mainly, that means we can not build apk / api file on a linux workstation for the moment. By the way, we can develop, and test build with an swf file. We should still use a Microsoft Windows or MacOs environnement to build the apk / ipa files.
 Ok, that's weird...
+- Flash movieclip can not be directly imported in starling. They must be convert BEFORE as bitmap data, and stored as starling textures.
+

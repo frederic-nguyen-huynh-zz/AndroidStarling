@@ -1,16 +1,21 @@
 package {
 
 	import flash.display.Sprite;
-	import flash.text.TextField;
 
+	import org.prototype.AndroidMainClass;
+
+	import starling.core.Starling;
+
+	[SWF(frameRate="32", height="600", width="800")]
 	public class AndroidStarling extends Sprite {
 
 		public function AndroidStarling () {
-			var textField : TextField = new TextField ();
-			textField.text = "Hello, World";
-			addChild (textField);
 
-
+			_starlingInstance = new Starling(AndroidMainClass, stage);
+			_starlingInstance.showStats = true;
+			_starlingInstance.start();
 		}
+
+		private var _starlingInstance : Starling;
 	}
 }
