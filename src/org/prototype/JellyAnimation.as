@@ -6,7 +6,9 @@
  * To change this template use File | Settings | File Templates.
  */
 package org.prototype {
+	import flash.display.Graphics;
 	import flash.display.MovieClip;
+	import flash.display.Sprite;
 
 	import starling.display.MovieClip;
 	import starling.textures.Texture;
@@ -15,10 +17,10 @@ package org.prototype {
 
 		public function JellyAnimation (animationClass : Class, playersColor : Vector.<int>) {
 			_animationClass = animationClass;
-			_playersColors = playersColor;
+			_overlaySprite = new Sprite();
 
 			if (_texturesByPlayersSeatId == null) {
-				initializeTextures ();
+				initializeTextures (playersColor);
 			}
 			super (_texturesByPlayersSeatId[0], MovieClipConversionUtils.MOVIECLIP_FPS);
 		}
@@ -34,20 +36,40 @@ package org.prototype {
 			}
 		}
 
-		private function initializeTextures () : void {
+		private function initializeTextures (playersColor : Vector.<int>) : void {
 			_texturesByPlayersSeatId = new Vector.<Vector.<Texture>> ();
 
 			var jellyAnimation : flash.display.MovieClip = new _animationClass ();
+			try {
+				jellyAnimation ["overlayClip"].addChild(_overlaySprite);
+			} catch (error : Error) {
+				return;
+			}
 			var animationBounds : IAnimationBound = MovieClipConversionUtils.getMaxSize (jellyAnimation);
 
-			for (var i : uint = 0; i < _playersColors.length; i++) {
+
+			for (var i : uint = 0; i < playersColor.length; i++) {
+				updateOverlayColor (playersColor[i]);
 				_texturesByPlayersSeatId.push(MovieClipConversionUtils.generateTexturesFromMovieClip (jellyAnimation, animationBounds));
 			}
 		}
 
-		private var _playersColors : Vector.<int>;
+		private function updateOverlayColor (color : uint) : Graphics {
+			var graphics : Graphics = _overlaySprite.graphics;
+			graphics.clear ();
+			graphics.beginFill (color);
+			graphics.moveTo (-1, -15);
+			graphics.lineTo (-1, _LETTER_SIZE + 30);
+			graphics.lineTo (_LETTER_SIZE + 2, _LETTER_SIZE + 30);
+			graphics.lineTo (_LETTER_SIZE + 2, -15);
+			graphics.endFill ();
+			return graphics;
+		}
+
 		private var _animationClass : Class;
+		private var _overlaySprite : Sprite;
 
 		private static var _texturesByPlayersSeatId : Vector.<Vector.<Texture>>;
+		private static const _LETTER_SIZE : int = 45;
 	}
 }
