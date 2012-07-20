@@ -13,32 +13,42 @@ package org.prototype {
 
 	import starling.display.MovieClip;
 	import starling.display.Sprite;
-	import starling.text.TextField;
 	import starling.textures.Texture;
 
 	public class AndroidMainClass extends Sprite {
 
 		public function AndroidMainClass () {
+			/*
+			 var jellyAnimation : JellyBirthAnimation = new JellyBirthAnimation ();
+			 var animationBounds : IAnimationBound = MovieClipConversionUtils.getMaxSize (jellyAnimation);
+			 var textures : Vector.<Texture> = MovieClipConversionUtils.generateTexturesFromMovieClip (jellyAnimation, animationBounds);
 
-			var jellyAnimation : JellyBirthAnimation = new JellyBirthAnimation ();
+			 var jellyStarlingMovieclip : MovieClip;
+			 */
+			var animation : JellyAnimation;
 
-			var animationBounds : IAnimationBound = MovieClipConversionUtils.getMaxSize (jellyAnimation);
-			var textures : Vector.<Texture> = MovieClipConversionUtils.generateTexturesFromMovieClip (jellyAnimation, animationBounds);
+			var playersColors : Vector.<int> = new Vector.<int> ();
+			playersColors.push(0);
+			playersColors.push(1);
+			playersColors.push(2);
+			playersColors.push(3);
 
-			var jellyStarlingMovieclip : MovieClip;
-			for (var colIndex : uint = 0; colIndex < 15; colIndex++) {
-				for (var rowIndex : uint = 0; rowIndex < 20; rowIndex++) {
-					jellyStarlingMovieclip = MovieClipConversionUtils.generateStarlingMovieClip (textures);
-					jellyStarlingMovieclip.x = colIndex * 50;
-					jellyStarlingMovieclip.y = rowIndex * 50;
-					jellyStarlingMovieclip.play ();
-					jellyStarlingMovieclip.loop = true;
-					addChild (jellyStarlingMovieclip);
-					Starling.juggler.add (jellyStarlingMovieclip);
+
+			for (var colIndex : uint = 0; colIndex < 10; colIndex++) {
+				for (var rowIndex : uint = 0; rowIndex < 9; rowIndex++) {
+					animation = new JellyAnimation (JellyBirthAnimation, playersColors);
+					animation.playerSeatId = 0;
+					animation.x = colIndex * 60;
+					animation.y = rowIndex * 60;
+					animation.play ();
+					animation.loop = true;
+					addChild (animation);
+					Starling.juggler.add (animation);
 				}
 			}
 
-			trace (animationBounds);
+
+
 		}
 
 	}
