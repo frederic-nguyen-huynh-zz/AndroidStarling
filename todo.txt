@@ -13,4 +13,4 @@ Problems / Issues
 Mainly, that means we can not build apk / api file on a linux workstation for the moment. By the way, we can develop, and test build with an swf file. We should still use a Microsoft Windows or MacOs environnement to build the apk / ipa files.
 Ok, that's weird...
 - Flash movieclip can not be directly imported in starling. They must be convert BEFORE as bitmap data, and stored as starling textures.
-
+- Flash movieclip rendering seems to not be able to get boundaries - clearly visible on letter birth animation
