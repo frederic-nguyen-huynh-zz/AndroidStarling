@@ -7,28 +7,38 @@
  */
 package org.prototype {
 
-	import flash.display.MovieClip;
-
 	import ice.wordox.gfx.JellyBirthAnimation;
 
-	import ice.wordox.gfx.JellyBreathingAnimation;
+	import starling.core.Starling;
 
-	import org.prototype.IAnimationBound;
-	import org.prototype.MovieClipConvertionUtils;
-
+	import starling.display.MovieClip;
 	import starling.display.Sprite;
 	import starling.text.TextField;
+	import starling.textures.Texture;
 
 	public class AndroidMainClass extends Sprite {
 
 		public function AndroidMainClass () {
 
-			var textField : TextField = new TextField (300, 30, "Hello World");
-			addChild (textField);
+			var jellyAnimation : JellyBirthAnimation = new JellyBirthAnimation ();
 
-			var jellyAnimation : MovieClip = new JellyBirthAnimation();
-			var animationBounds : IAnimationBound = MovieClipConvertionUtils.getMaxSize (jellyAnimation);
-			trace(animationBounds);
+			var animationBounds : IAnimationBound = MovieClipConversionUtils.getMaxSize (jellyAnimation);
+			var textures : Vector.<Texture> = MovieClipConversionUtils.generateTexturesFromMovieClip (jellyAnimation, animationBounds);
+
+			var jellyStarlingMovieclip : MovieClip;
+			for (var colIndex : uint = 0; colIndex < 15; colIndex++) {
+				for (var rowIndex : uint = 0; rowIndex < 20; rowIndex++) {
+					jellyStarlingMovieclip = MovieClipConversionUtils.generateStarlingMovieClip (textures);
+					jellyStarlingMovieclip.x = colIndex * 50;
+					jellyStarlingMovieclip.y = rowIndex * 50;
+					jellyStarlingMovieclip.play ();
+					jellyStarlingMovieclip.loop = true;
+					addChild (jellyStarlingMovieclip);
+					Starling.juggler.add (jellyStarlingMovieclip);
+				}
+			}
+
+			trace (animationBounds);
 		}
 
 	}
